@@ -13,6 +13,13 @@ module OrderForm
 
     # 日本語化
     config.i18n.default_locale = :ja
+    config.time_zone = "Tokyo"
+    config.active_record.default_timezone = :local
+
+    # バリデーションエラー時の「field_with_errors」を兵司しないための記述
+    config.action_view.field_error_proc = proc do |html_tag, _|
+      html_tag.html_safe
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #
