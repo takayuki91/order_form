@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   def confirm
     if params[:order].present?
       @order = Order.new(order_params)
+      return render :new if @order.invalid?
     else
       # ユーザーがリロードした時
       return redirect_to new_order_path
