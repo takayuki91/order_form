@@ -6,3 +6,8 @@ ja:
         email: メールアドレス
         telephone: 電話番号
         delivery_address: お届け先住所
+
+    errors:
+      messages:
+        blank: 入力されていません
+        not_a_number: 数値ではありません
