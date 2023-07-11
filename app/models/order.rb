@@ -18,7 +18,7 @@ class Order < ApplicationRecord
 
   def format_telephone
     return if telephone.blank?
-    self.telephone = telephone.tr( "０-９", "0-9").delete("^0-9")
+    self.telephone = telephone.tr("０-９", "0-9").delete("^0-9")
   end
 
   def format_email
