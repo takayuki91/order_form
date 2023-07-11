@@ -30,6 +30,13 @@
       </div>
       <%= @order.delivery_address %>
     </div>
+    
+    <div class="mb-3">
+      <div class="form-label border-start border-primary border-4 ps-1">
+        <%= t("activerecord.attributes.order.payment_method_id") %>
+      </div>
+      <%= @order.payment_method.name %>
+    </div>
 
   </div>
 
@@ -38,6 +45,7 @@
     <%= f.hidden_field :email %>
     <%= f.hidden_field :telephone %>
     <%= f.hidden_field :delivery_address %>
+    <%= f.hidden_field :payment_method_id %>
       <div class="d-grid col-md-6 mx-auto">
         <%= f.button "OK", class: "btn btn-lg btn-primary mb-3" %>
       </div>
