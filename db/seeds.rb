@@ -8,7 +8,7 @@
 
 ApplicationRecord.transaction do
   PaymentMethod.delete_all
-  
+
   PaymentMethod.create(id: 1, name: "クレジットカード")
   PaymentMethod.create(id: 2, name: "銀行振込")
   PaymentMethod.create(id: 3, name: "代引き")

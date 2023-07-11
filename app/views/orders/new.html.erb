@@ -9,33 +9,35 @@
         <!--部分テンプレート-->
         <%= render partial: "shared/error_messages", locals: { record: @order, symbol: :name } %>
       </div>
-    </div>
 
-    <div class="col-md-6 mx-auto mb-5">
       <div class="mb-3">
         <%= f.label :email, class: "form-label border-start border-primary border-4 ps-1" %>
         <%= f.text_field :email, size: 100, placeholder: "sample@example.com", class: "form-control" %>
-        
+
         <%= render partial: "shared/error_messages", locals: { record: @order, symbol: :email } %>
       </div>
-    </div>
 
-    <div class="col-md-6 mx-auto mb-5">
       <div class="mb-3">
         <%= f.label :telephone, class: "form-label border-start border-primary border-4 ps-1" %>
         <%= f.text_field :telephone, size: 40, placeholder: "09012345678", class: "form-control" %>
-        
+
         <%= render partial: "shared/error_messages", locals: { record: @order, symbol: :telephone } %>
       </div>
-    </div>
 
-    <div class="col-md-6 mx-auto mb-5">
       <div class="mb-3">
         <%= f.label :delivery_address, class: "form-label border-start border-primary border-4 ps-1" %>
         <%= f.text_field :delivery_address, size: 40, placeholder: "お届け先住所をご入力ください。", class: "form-control" %>
-        
+
         <%= render partial: "shared/error_messages", locals: { record: @order, symbol: :delivery_address } %>
       </div>
+
+      <div class="mb-3">
+        <%= f.label :payment_method_id, class: "form-label border-start border-primary border-4 ps-1" %>
+        <%= f.select :payment_method_id, PaymentMethod.selectable_methods, { include_blank: true }, class: "form-select" %>
+
+        <%= render partial: "shared/error_messages", locals: { record: @order, symbol: :payment_method_id } %>
+      </div>
+
     </div>
 
     <div class="d-grid col-md-6 mx-auto">
