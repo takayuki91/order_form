@@ -1,6 +1,8 @@
 require "nkf"
 
 class Order < ApplicationRecord
+  # 親テーブルを作成したため
+  belongs_to :payment_method
 
   validates :name, presence: true, length: { maximum: 40 }
   # バリデーターと紐付ける
