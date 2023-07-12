@@ -50,7 +50,8 @@ class OrdersController < ApplicationController
                   :telephone,
                   :delivery_address,
                   :payment_method_id,
-                  :other_comment)
+                  :other_comment,
+                  :direct_mail_enabled)
   end
 
 end

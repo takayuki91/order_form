@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_12_003722) do
+ActiveRecord::Schema.define(version: 2023_07_12_014750) do
 
   create_table "orders", force: :cascade do |t|
     t.string "name", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2023_07_12_003722) do
     t.string "delivery_address", null: false
     t.integer "payment_method_id"
     t.string "other_comment", limit: 1000, default: "", null: false
+    t.boolean "direct_mail_enabled", null: false
     t.index ["payment_method_id"], name: "index_orders_on_payment_method_id"
   end
 
