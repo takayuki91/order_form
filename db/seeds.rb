@@ -14,4 +14,5 @@ ApplicationRecord.transaction do
   PaymentMethod.create(id: 3, name: "代引き")
   PaymentMethod.create(id: 4, name: "コンビニ支払い")
   PaymentMethod.create(id: 5, name: "郵便為替")
+  
 end
