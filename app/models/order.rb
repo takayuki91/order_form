@@ -3,6 +3,8 @@ require "nkf"
 class Order < ApplicationRecord
   # 親テーブルを作成したため
   belongs_to :payment_method
+  has_many :order_inflow_sources
+  has_many :inflow_sources, through: :order_inflow_sources
 
   validates :name, presence: true, length: { maximum: 40 }
   # email_formatバリデーターと紐付ける
