@@ -3,8 +3,14 @@ require "nkf"
 class Order < ApplicationRecord
   # 親テーブルを作成したため
   belongs_to :payment_method
+
   has_many :order_inflow_sources
   has_many :inflow_sources, through: :order_inflow_sources
+
+  has_many :order_products
+
+  # パラメータを受け取るときに、子テーブルのパラメータも受け取る
+  accepts_nested_attributes_for :order_products
 
   validates :name, presence: true, length: { maximum: 40 }
   # email_formatバリデーターと紐付ける
