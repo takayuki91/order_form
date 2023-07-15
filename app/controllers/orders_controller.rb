@@ -2,16 +2,28 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @order.order_products.build
   end
 
   def confirm
-    if params[:order].present?
-      @order = Order.new(order_params)
-      return render :new if @order.invalid?
-    else
-      # ユーザーがリロードした時
+
+    unless params[:order].present?
       return redirect_to new_order_path
     end
+
+    @order = Order.new(order_params)
+    if params.key?(:add_product)
+      @order.order_products << OrderProduct.new
+      return render :new
+    end
+
+    if params.key?(:delete_product)
+      filter_order_products
+      return render :new
+    end
+
+    return render :new if @order.invalid?
+
   end
 
   def create
@@ -52,7 +64,14 @@ class OrdersController < ApplicationController
                   :payment_method_id,
                   :other_comment,
                   :direct_mail_enabled,
-                  inflow_source_ids: [])
+                  inflow_source_ids: [],
+                  order_products_attributes: %i[product_id quantity]) #シンボルの配列であると明示
+  end
+
+  def filter_order_products
+    @order.order_products = @order.order_products
+                                  .reject
+                                  .with_index { |_, index| index == params[:delete_product].to_i}
   end
 
 end
