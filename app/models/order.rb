@@ -1,6 +1,9 @@
 require "nkf"
 
 class Order < ApplicationRecord
+
+  TAX_RATE = 1.1
+
   # 親テーブルを作成したため
   belongs_to :payment_method
 
@@ -25,6 +28,11 @@ class Order < ApplicationRecord
   # コールバック
   after_initialize :format_telephone
   after_initialize :format_email
+
+  def total_price
+    # (order_products.map(&:order_price).sum * TAX_RATE).ceil
+    (BigDecimal(order_products.map(&:order_price).sum.to_s) * BigDecimal(TAX_RATE.to_s)).ceil
+  end
 
   private
 

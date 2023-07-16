@@ -1,6 +1,49 @@
 require 'rails_helper'
 
 RSpec.describe "注文フォーム", type: :system do
+
+  describe "#total_price" do
+    let(:params) do
+      {
+        order_priducts_attributes: [
+          {
+            product_id: 1,
+            quantity: 3
+          },
+          {
+            product_id: 2,
+            quantity: 2
+          }
+        ]
+      }
+    end
+
+    subject { Order.new(params).total_price }
+
+    it { is_expected.to eq 12800 + 1280 }
+
+    context "消費税に端数が出た場合" do
+      # FactoryBotを呼び出す
+      before do
+        create(:product, id: 99, price: 299)
+      end
+
+      let(:params) do
+        {
+          order_priducts_attributes: [
+            {
+              product_id: 99,
+              quantity: 1
+            }
+          ]
+        }
+      end
+
+      # お値段 299 消費税 29.9 切り上げ = 30
+      it { is_expected.to eq 329 }
+    end
+  end
+
   let(:name) { "サンプルマン" }
   let(:email) { "test@example.com" }
   let(:telephone) { "09012345678" }
@@ -94,7 +137,7 @@ RSpec.describe "注文フォーム", type: :system do
         expect(page).to have_select "支払い方法", selected: "銀行振込"
         expect(page).to have_field "その他・ご要望", with: other_comment
         expect(page).to have_checked_field "配信を希望する"
-        
+
         expect(page).to have_checked_field "検索エンジン"
         expect(page).to have_unchecked_field "知人の紹介"
         expect(page).to have_unchecked_field "新聞・雑誌"
