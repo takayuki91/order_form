@@ -66,3 +66,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # デコレーター
 gem 'active_decorator'
+
+# 非同期処理
+gem "sidekiq"
