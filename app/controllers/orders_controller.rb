@@ -36,6 +36,8 @@ class OrdersController < ApplicationController
 
     #　sessionに注文情報を一時保存
     if @order.save
+      # メール送信
+      OrderMailer.mail_to_user(@order.id).deliver
       session[:order_id] = @order.id
       return redirect_to complete_orders_path
     end
