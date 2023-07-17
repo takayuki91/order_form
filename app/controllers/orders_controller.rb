@@ -37,7 +37,9 @@ class OrdersController < ApplicationController
     #　sessionに注文情報を一時保存
     if @order.save
       # メール送信
-      OrderMailer.mail_to_user(@order.id).deliver
+      # OrderMailer.mail_to_user(@order.id).deliver
+      # 非同期処理
+      OrderMailerJob.perform_later(@order.id)
       session[:order_id] = @order.id
       return redirect_to complete_orders_path
     end
